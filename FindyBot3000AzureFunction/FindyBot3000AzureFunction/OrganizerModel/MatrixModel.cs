@@ -5,9 +5,9 @@ namespace FindyBot3000.AzureFunction
     // This begs for a stateful azure function...
     public class MatrixModel
     {
-        private const int TopRows = 8;
+        private const int TopRows = 12;
         private const int TopCols = 16;
-        private const int BottomRows = 6;
+        private const int BottomRows = 9;
         private const int BottomCols = 8;
 
         private bool[,] TopItems = new bool[TopRows, TopCols];
@@ -15,13 +15,13 @@ namespace FindyBot3000.AzureFunction
 
         public void AddItem(int row, int col)
         {
-            if (row < 8)
+            if (row < 12)
             {
                 this.TopItems[row, col] = true;
             }
-            else if (row < 14)
+            else if (row < 21)
             {
-                this.BottomItems[row - 8, col] = true;
+                this.BottomItems[row - 12, col] = true;
             }
         }
 
@@ -35,9 +35,9 @@ namespace FindyBot3000.AzureFunction
             {
                 (int row, int col) = this.GetBoxAndUpdate(BottomItems, BottomRows, BottomCols);
 
-                // 8 rows of small boxes on top, with 6 rows of big boxes below.
+                // 12 rows of small boxes on top, with 9 rows of big boxes below.
                 // Indexing for rows and columns start at top left.
-                row += 8;
+                row += 12;
 
                 return (row, col);
             }
